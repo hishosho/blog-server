@@ -1,33 +1,24 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const express = require('express');
+const router = express.Router();
 
-const autoIncrement = require('mongoose-auto-increment');
-autoIncrement.initialize(mongoose.connection);
+const user_controller = require('../controllers/userController')
 
-const UserSchema = new Schema(
-  {
-    // 用户名
-    user_name: { type: String, required: true, max: 200 },
-    // 用户密码
-    password: {
-      type: String,
-      required: true,
-    },
-    // 用户类型 1: 管理员 2: 普通用户
-    user_type: { type: Number, default: 1 },
-    // 创建时间
-    create_date: { type: Date, default: Date.now },
-    // 最后修改时间
-    update_date: { type: Date, default: Date.now },
-    // timestamps: { createdAt: 'create_date', updatedAt: 'update_date' }
-  }
-)
+// 获取登录公钥
+// router.get('/publicKey', user_controller.user_publicKey)
 
-UserSchema.plugin(autoIncrement.plugin, {
-  model: 'User',
-  field: '_id',
-  startAt: 1,
-  incrementBy: 1
-});
+// 查询用户数量
+router.get('/user/count', user_controller.user_count)
 
-module.exports = mongoose.model('User', UserSchema);
+// 获取所有用户
+router.get('/users', user_controller.user_list);
+
+// 创建用户
+router.post('/register', user_controller.user_register)
+
+// 删除用户
+router.delete('/user/:id', user_controller.user_delete)
+
+// 用户登录
+router.post('/login', user_controller.user_login)
+
+module.exports = router;

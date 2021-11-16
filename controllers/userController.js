@@ -1,5 +1,24 @@
 const User = require('../models/user')
+const NodeRSA = require('node-rsa')
+const { privateKey } = require('../config')
+const bcrypt = require('bcryptjs')
 
+const salt = bcrypt.genSaltSync(10)
+
+exports.user_publicKey = (req, res, next) => {
+  const key = new NodeRSA({ b: 1024 })
+  key.setOptions({
+    encryptionScheme: 'pkcs1'
+  })
+
+  const publicKey = key.exportKey('public')
+  const privateKey = key.exportKey('private')
+  res.status(200).json({
+    code: true,
+    message: '获取成功！',
+    data: publicKey
+  })
+}
 exports.user_count = (req, res, next) => {
  User.countDocuments({}, (err, count) => {
    if (err) return next(err)
@@ -21,8 +40,9 @@ exports.user_list = (req, res, next) => {
   })
 }
 
-exports.user_create = (req, res, next) => {
-  User.findOne({ 'user_name': req.body.userName })
+exports.user_register = (req, res, next) => {
+  const { userName } = req.body
+  User.findOne({ 'user_name': userName })
     .exec((err, found_user) => {
       if (err) return next(err);
       if (found_user) {
@@ -31,15 +51,14 @@ exports.user_create = (req, res, next) => {
           message: '用户已存在！'
         });
       } else {
-        const {
-          userName,
-          userType,
-          password,
-        } = req.body
-
+        let key = new NodeRSA(privateKey)
+        key.setOptions({encryptionScheme: 'pkcs1'})
+        const { password, userType } = req.body
+        const pw = key.decrypt(password, 'utf8')
+        const pwHash = bcrypt.hashSync(pw, salt)
         const user = new User({
           user_name: userName,
-          password,
+          password: pwHash,
           user_type: userType
         })
         user.save().then(data => {
@@ -94,9 +113,14 @@ exports.user_login = (req, res, next) => {
     });
     return
   }
-  User.findOne({ user_name: userName, password }, (err, userInfo) => {
+
+  let key = new NodeRSA(privateKey)
+  key.setOptions({encryptionScheme: 'pkcs1'})
+  const pw = key.decrypt(password, 'utf8')
+
+  User.findOne({ user_name: userName }, (err, userInfo) => {
     if (err) return next(err)
-    if (userInfo) {
+    if (userInfo && bcrypt.compareSync(pw, userInfo.password)) {
       res.status(200).json({
         code: true,
         message: '登录成功！'
