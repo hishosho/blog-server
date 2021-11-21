@@ -11,6 +11,17 @@ exports.blog_list = (req, res, next) => {
   })
 }
 
+exports.blog_by_id = (req, res, next) => {
+  Blog.find({ id: req.params.id }, (err, data) => {
+    if (err) return next(err)
+    res.status(200).json({
+      code: true,
+      message: '操作成功！',
+      data
+    })
+  })
+}
+
 exports.blog_publishedBlogs = (req, res, next) => {
   Blog.find({ status: 2 }, (err, data) => {
     if (err) return next(err)
@@ -34,8 +45,19 @@ exports.blog_publishedBlogs_by_tags = (req, res, next) => {
   })
 }
 
+exports.blog_publishedBlogs_by_id = (req, res, next) => {
+  Blog.find({ id: req.params.id }, (err, data) => {
+    if (err) return next(err)
+    res.status(200).json({
+      code: true,
+      message: '操作成功！',
+      data
+    })
+  })
+}
+
 exports.blog_popular = (req, res, next) => {
-  Model
+  Blog
     .find()
     .sort('-visit_count')
     .limit(10)
@@ -102,7 +124,7 @@ exports.blog_update = (req, res, next) => {
     _id: req.params.id
   })
 
-  Blog.findByIdAndUpdate(id, blog, {}, (err, data) => {
+  Blog.findByIdAndUpdate(req.params.id, blog, {}, (err, data) => {
     if (err) return next(err)
     res.status(200).json({
       code: true,

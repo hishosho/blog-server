@@ -3,6 +3,9 @@ const router = express.Router();
 
 const user_controller = require('../controllers/userController')
 
+// 获取登录公钥
+// router.get('/publicKey', user_controller.user_publicKey)
+
 // 查询用户数量
 router.get('/user/count', user_controller.user_count)
 
@@ -10,7 +13,7 @@ router.get('/user/count', user_controller.user_count)
 router.get('/users', user_controller.user_list);
 
 // 创建用户
-router.post('/user', user_controller.user_create)
+router.post('/register', user_controller.user_register)
 
 // 删除用户
 router.delete('/user/:id', user_controller.user_delete)
