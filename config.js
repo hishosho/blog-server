@@ -13,3 +13,7 @@ muvfnXIMqBOoIxKttltUxNWKTZicPcF40a1v4hjeJOvKmxHhmvHDKSXBTIAIyUm+
 6/zARAykPQggfPkFzWECQEb9uTPccpe9M25WYTICV1u6rvryUyvNkNNqdZ2Hcssx
 lw6NprBTNsxr8QNWhkbhlr09ivsUTCsUGo8PF8IN4n8=
 -----END RSA PRIVATE KEY-----`
+
+exports.TOKEN_EXPIRE_TIME = 24 * 60 * 60
+
+exports.whitePaths = ['users/login', 'users/register']

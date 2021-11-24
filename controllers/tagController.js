@@ -1,24 +1,17 @@
 const Tag = require('../models/tag')
+const { responseRet } = require('../util/http')
 
 exports.tag_list = (req, res, next) => {
   Tag.find({}, (err, data) => {
     if (err) return next(err)
-    res.status(200).json({
-      code: true,
-      message: '操作成功！',
-      data
-    })
+    responseRet(res, { data })
   })
 }
 
 exports.tag_by_id = (req, res, next) => {
   Blog.find({ id: req.params.id }, (err, data) => {
     if (err) return next(err)
-    res.status(200).json({
-      code: true,
-      message: '操作成功！',
-      data
-    })
+    responseRet(res, { data })
   })
 }
 
@@ -27,19 +20,11 @@ exports.tag_add = (req, res, next) => {
   blog
     .save()
     .then(data => {
-      res.status(200).json({
-        code: true,
-        message: '操作成功！',
-        data
-      })
+      responseRet(res, { data })
     })
     .catch(err => {
       console.error('db err=', err)
-      res.status(200).json({
-        code: false,
-        message: '数据录入失败，请稍后重试',
-        data
-      })
+      responseRet(res, { data })
     })
 }
 
@@ -47,20 +32,14 @@ exports.tag_update = (req, res, next) => {
   const tag = new Tag({ name: req.body, _id: req.params.id })
   Tag.findByIdAndUpdate(req.params.id, tag, {}, (err, data) => {
     if (err) return next(err)
-    res.status(200).json({
-      code: true,
-      message: '操作成功！',
-      data
-    })
+    responseRet(res, { data })
+
   })
 }
 
 exports.tag_delete = (req, res, next) => {
-  Tag.findByIdAndRemove(req.params.id, (err, data) => {
+  Tag.findByIdAndRemove(req.params.id, (err) => {
     if (err) return next(err)
-    res.status(200).json({
-      code: true,
-      message: '删除成功！'
-    })
+    responseRet(res, { message: '删除成功！' })
   })
 }
