@@ -4,10 +4,10 @@ const { privateKey, REDIS_EXP_TIME } = require('../config')
 
 const createToken = (userName) => {
   const token = jwt.sign({ userName }, privateKey, { algorithm: 'RS256' })
-  redisClient.set(token, {
+  redisClient.set(token, JSON.stringify({
     userName,
     createDate: new Date().getTime()
-  })
+  }))
   redisClient.expire(token, REDIS_EXP_TIME)
   return token
 }

@@ -4,6 +4,8 @@ module.exports = (err, req, res, next) => {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
+  console.error(err.message);
+
   // render the error page
   responseRet(res, { message: '系统错误', code: false }, err.status || 500)
 }

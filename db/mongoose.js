@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 exports.initMongoDB = () => {
   const mongoDB = 'mongodb://127.0.0.1/blog_database'
-  // mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
+  mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
   // 让 mongoose 使用全局 Promise
   mongoose.Promise = global.Promise
   // 取得默认连接
