@@ -2,16 +2,59 @@ const Blog = require('../models/blog')
 const { responseRet } = require('../util/http')
 
 exports.blog_list = (req, res, next) => {
-  Blog.find({}, (err, data) => {
-    if (err) return next(err)
-    responseRet(res, { data })
-  })
+  const data = {
+    total: 2,
+    rows: [{
+      id: 1,
+      title: `blog_1`,
+      state: 'pubilshed',
+      order: 1,
+      tags: [{
+          id: 1,
+          name: 'Vue'
+        },
+        {
+          id: 2,
+          name: 'React'
+        }
+      ],
+      admireCount: 1,
+      visitCount: 1,
+      publishDate: Date.now(),
+      updateDate: Date.now(),
+    },
+    {
+      id: 2,
+      title: `blog_2`,
+      state: 'pubilshed',
+      order: 2,
+      tags: [{
+          id: 1,
+          name: 'Vue'
+        },
+        {
+          id: 2,
+          name: 'React'
+        }
+      ],
+      admireCount: 1,
+      visitCount: 1,
+      publishDate: Date.now(),
+      updateDate: Date.now(),
+    }]
+  }
+  responseRet(res, { data })
+  // Blog.find({}, (err, data) => {
+  //   if (err) return next(err)
+  //   responseRet(res, { data })
+  // })
 }
 
 exports.blog_by_id = (req, res, next) => {
   Blog.find({ id: req.params.id }, (err, data) => {
     if (err) return next(err)
     esponseRet(res, { data })
+    
   })
 }
 

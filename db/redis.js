@@ -1,5 +1,5 @@
 const redis = require('redis')
-const redisClient = redis.createClient('127.0.0.1')
+const redisClient = redis.createClient()
 
 redisClient.on('ready', res => {
   console.log('redis 启动成功！', res)

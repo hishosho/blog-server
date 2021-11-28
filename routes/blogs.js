@@ -6,6 +6,9 @@ const blog_controller = require('../controllers/blogController');
 // 查询所有博客
 router.get('/', blog_controller.blog_list);
 
+// 根据ID查询某个博客
+router.get('/blog/:id', blog_controller.blog_by_id)
+
 // 查询所有已发布的博客
 router.get('/publishedBlogs', blog_controller.blog_publishedBlogs);
 

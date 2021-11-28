@@ -89,7 +89,7 @@ exports.user_login = (req, res, next) => {
     if (userInfo && bcrypt.compareSync(pw, userInfo.password)) {
       // 创建token
       const token = createToken(userName)
-      res.header('Authoritarian', token)
+      res.cookie('Authoritarian', `Bearer  ${token}`, { httpOnly: true })
       responseRet(res, { message: '登录成功！' })
     } else {
       responseRet(res, { message: '账号密码错误或账号不存在！', code: false})
