@@ -1,6 +1,5 @@
 const cookieParser = require('cookie-parser');
 const createError = require('http-errors');
-const session = require('express-session');
 const express = require('express');
 const logger = require('morgan');
 const path = require('path');
@@ -12,6 +11,7 @@ const error = require('./middleware/error');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const blogsRouter = require('./routes/blogs');
+const tagsRouter = require('./routes/tags');
 
 const { initMongoDB } = require('./db/mongoose');
 
@@ -19,11 +19,6 @@ const { initMongoDB } = require('./db/mongoose');
 initMongoDB()
 
 const app = express();
-app.use(session({
-  secret: 'keyboard cat',
-  resave: true,
-  saveUninitialized:true
-}))
 
 // 处理跨域问题
 app.use(dealCorssDomain)
@@ -45,6 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/blogs', blogsRouter)
+app.use('/tags', tagsRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

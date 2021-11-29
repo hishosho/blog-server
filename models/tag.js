@@ -7,8 +7,10 @@ const TagSchema = new Schema(
   {
     // 标签名称
     name: { type: String, required: true },
-    // 标签创建和最后更新时间
-    timestamps: { createdAt: 'create_date', updatedAt: 'update_date' }
+    // 标签创建时间
+    create_date: { type: Date, default: Date.now },
+    // 标签更新时间
+    update_date: { type: Date, default: Date.now },
   }
 )
 

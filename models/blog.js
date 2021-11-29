@@ -16,7 +16,7 @@ const BlogSchema = new Schema(
     // 点赞数量
     admire_count: Number,
     // 博客状态：1：待发布 2：已发布
-    status: { type: Number, required: true },
+    status: { type: Number, required: true, default: 1 },
     // 博客内容
     content: { type: String, required: true },
     // 博客创建时间

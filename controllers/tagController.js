@@ -1,35 +1,37 @@
 const Tag = require('../models/tag')
 const { responseRet } = require('../util/http')
+const taglist = require('../mock/BlogTag')
 
 exports.tag_list = (req, res, next) => {
-  Tag.find({}, (err, data) => {
-    if (err) return next(err)
-    responseRet(res, { data })
-  })
+  const data = taglist
+  responseRet(res, { data })
+  // Tag.find({}, (err, data) => {
+  //   if (err) return next(err)
+  //   responseRet(res, { data })
+  // })
 }
 
 exports.tag_by_id = (req, res, next) => {
-  Blog.find({ id: req.params.id }, (err, data) => {
+  Tag.find({ id: req.params.id }, (err, data) => {
     if (err) return next(err)
     responseRet(res, { data })
   })
 }
 
 exports.tag_add = (req, res, next) => {
-  const blog = new Tag({ name: req.body })
-  blog
+  const tag = new Tag({ name: req.body.name })
+  tag
     .save()
     .then(data => {
       responseRet(res, { data })
     })
     .catch(err => {
-      console.error('db err=', err)
-      responseRet(res, { data })
+      next(err)
     })
 }
 
 exports.tag_update = (req, res, next) => {
-  const tag = new Tag({ name: req.body, _id: req.params.id })
+  const tag = new Tag({ name: req.body.name, _id: req.params.id })
   Tag.findByIdAndUpdate(req.params.id, tag, {}, (err, data) => {
     if (err) return next(err)
     responseRet(res, { data })
