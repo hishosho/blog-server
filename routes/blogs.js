@@ -9,14 +9,17 @@ router.get('/', blog_controller.blog_list);
 // 根据ID查询某个博客
 router.get('/blog/:id', blog_controller.blog_by_id)
 
+// 根据ID查询某个博客
+router.get('/blogDetail', blog_controller.blog_by_id)
+
 // 查询所有已发布的博客
 router.get('/publishedBlogs', blog_controller.blog_publishedBlogs);
 
 // 根据分类标签查询已发布博客
-router.get('/publishBlogsByTags/:tags', blog_controller.blog_publishedBlogs_by_tags);
+router.post('/publishBlogsByTags', blog_controller.blog_publishedBlogs_by_tags);
 
 // 查询热门博客
-router.get('/popularBlogs', blog_controller.blog_popular);
+router.get('/popular', blog_controller.blog_popular);
 
 // 创建博客
 router.post('/create', blog_controller.blog_create);

@@ -16,4 +16,12 @@ lw6NprBTNsxr8QNWhkbhlr09ivsUTCsUGo8PF8IN4n8=
 
 exports.TOKEN_EXPIRE_TIME = 24 * 60 * 60
 
-exports.whitePaths = ['/users/login', '/users/register']
+exports.whitePaths = [
+  '/users/login',
+  '/users/register',
+  '/blogs/publishedBlogs',
+  '/blogs/popular',
+  '/tags',
+  '/blogs/blogDetail',
+  '/blogs/getBlogsByTagId'
+]
