@@ -13,12 +13,12 @@ exports.blog_list = (req, res, next) => {
 }
 
 exports.blog_by_id = (req, res, next) => {
-  const data = detail
-  responseRet(res, { data })
-  // Blog.find({ id: req.params.id }, (err, data) => {
-  //   if (err) return next(err)
-  //   responseRet(res, { data })
-  // })
+  // const data = detail
+  // responseRet(res, { data })
+  Blog.find({ id: req.params.id }, (err, data) => {
+    if (err) return next(err)
+    responseRet(res, { data: data[0] })
+  })
 }
 
 exports.blog_publishedBlogs = (req, res, next) => {
