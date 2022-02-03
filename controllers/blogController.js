@@ -9,7 +9,7 @@ exports.blog_list = (req, res, next) => {
   Blog.find({}, (err, data) => {
     if (err) return next(err)
     responseRet(res, { data })
-  })
+  }).sort({'order': 1})
 }
 
 exports.blog_by_id = (req, res, next) => {
@@ -64,6 +64,7 @@ exports.blog_create = (req, res, next) => {
     desc,
     tags,
     content,
+    order,
   } = req.body
 
   const blog = new Blog({
@@ -72,6 +73,7 @@ exports.blog_create = (req, res, next) => {
     tags,
     status: 1,
     content,
+    order,
     visit_count: 0,
     admire_count: 0
   })
@@ -94,6 +96,7 @@ exports.blog_update = (req, res, next) => {
     tags,
     content,
     status,
+    order,
     publishDate
   } = req.body
 
@@ -103,6 +106,7 @@ exports.blog_update = (req, res, next) => {
     tags,
     content,
     status,
+    order,
     publish_date: publishDate,
     _id: req.params.id
   })

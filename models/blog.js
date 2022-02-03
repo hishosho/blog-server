@@ -11,6 +11,7 @@ const BlogSchema = new Schema(
     desc: { type: String },
     // 博客标签列表
     tags: [String],
+    order: Number,
     // 博客访问次数
     visit_count: Number,
     // 点赞数量
