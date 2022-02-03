@@ -93,7 +93,8 @@ exports.blog_update = (req, res, next) => {
     desc,
     tags,
     content,
-    status
+    status,
+    publishDate
   } = req.body
 
   const blog = new Blog({
@@ -102,6 +103,7 @@ exports.blog_update = (req, res, next) => {
     tags,
     content,
     status,
+    publish_date: publishDate,
     _id: req.params.id
   })
 

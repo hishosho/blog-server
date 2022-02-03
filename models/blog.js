@@ -24,7 +24,7 @@ const BlogSchema = new Schema(
     // 博客更新时间
     update_date: { type: Date, default: Date.now },
     // 博客发布时间
-    publish_date: Date,
+    publish_date: { type: Date, default: null },
     // timestamps: { createdAt: 'create_date', updatedAt: 'update_date' }
   }
 )
