@@ -1,14 +1,11 @@
 const Tag = require('../models/tag')
 const { responseRet } = require('../util/http')
-const taglist = require('../mock/BlogTag')
 
 exports.tag_list = (req, res, next) => {
-  const data = taglist
-  responseRet(res, { data })
-  // Tag.find({}, (err, data) => {
-  //   if (err) return next(err)
-  //   responseRet(res, { data })
-  // })
+  Tag.find({}, (err, data) => {
+    if (err) return next(err)
+    responseRet(res, { data })
+  })
 }
 
 exports.tag_by_id = (req, res, next) => {
@@ -31,8 +28,8 @@ exports.tag_add = (req, res, next) => {
 }
 
 exports.tag_update = (req, res, next) => {
-  const tag = new Tag({ name: req.body.name, _id: req.params.id })
-  Tag.findByIdAndUpdate(req.params.id, tag, {}, (err, data) => {
+  const tag = new Tag({ name: req.body.name, _id: req.body.id })
+  Tag.findByIdAndUpdate(req.body.id, tag, {}, (err, data) => {
     if (err) return next(err)
     responseRet(res, { data })
 
