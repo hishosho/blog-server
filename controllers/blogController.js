@@ -93,6 +93,7 @@ exports.blog_update = (req, res, next) => {
     desc,
     tags,
     content,
+    status
   } = req.body
 
   const blog = new Blog({
@@ -100,6 +101,7 @@ exports.blog_update = (req, res, next) => {
     desc,
     tags,
     content,
+    status,
     _id: req.params.id
   })
 
