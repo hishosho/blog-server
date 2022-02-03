@@ -1,15 +1,15 @@
 const Blog = require('../models/blog')
 const { responseRet } = require('../util/http')
-const blogList = require('../mock/BlogList')
+// const blogList = require('../mock/BlogList')
 const detail = require('../mock/BlogDetail')
 
 exports.blog_list = (req, res, next) => {
-  const data = blogList
-  responseRet(res, { data })
-  // Blog.find({}, (err, data) => {
-  //   if (err) return next(err)
-  //   responseRet(res, { data })
-  // })
+  // const data = blogList
+  // responseRet(res, { data })
+  Blog.find({}, (err, data) => {
+    if (err) return next(err)
+    responseRet(res, { data })
+  })
 }
 
 exports.blog_by_id = (req, res, next) => {
