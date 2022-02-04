@@ -22,12 +22,12 @@ exports.blog_by_id = (req, res, next) => {
 }
 
 exports.blog_publishedBlogs = (req, res, next) => {
-  const data = blogList
-  responseRet(res, { data })
-  // Blog.find({ status: 2 }, (err, data) => {
-  //   if (err) return next(err)
-  //   responseRet(res, { data })
-  // })
+  // const data = blogList
+  // responseRet(res, { data })
+  Blog.find({ status: 2 }, (err, data) => {
+    if (err) return next(err)
+    responseRet(res, { data })
+  })
 }
 
 exports.blog_publishedBlogs_by_tags = (req, res, next) => {
