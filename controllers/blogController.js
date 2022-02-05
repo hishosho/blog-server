@@ -37,9 +37,10 @@ exports.blog_publishedBlogs = (req, res, next) => {
   })
 }
 
-exports.blog_publishedBlogs_by_tags = (req, res, next) => {
-  const { tags } = req.body.tags
-  Blog.find({ status: { $in: tags } }, (err, data) => {
+exports.blog_publishedBlogs_by_tagId = (req, res, next) => {
+  const tagId = req.query.tagId
+  const conditions = tagId === '-1' ? { status: 2 } : { tags: { $in: [tagId] }, status: 2 }
+  Blog.find(conditions, (err, data) => {
     if (err) return next(err)
     responseRet(res, { data })
   })

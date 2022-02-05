@@ -23,5 +23,5 @@ exports.whitePaths = [
   '/blogs/popular',
   '/tags',
   '/blogs/blogDetail',
-  '/blogs/getBlogsByTagId'
+  '/blogs/publishedBlogsByTagId'
 ]

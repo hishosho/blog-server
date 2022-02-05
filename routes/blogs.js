@@ -16,7 +16,7 @@ router.get('/blogDetail', blog_controller.blogDetail_by_id)
 router.get('/publishedBlogs', blog_controller.blog_publishedBlogs);
 
 // 根据分类标签查询已发布博客
-router.post('/publishBlogsByTags', blog_controller.blog_publishedBlogs_by_tags);
+router.get('/publishedBlogsByTagId', blog_controller.blog_publishedBlogs_by_tagId);
 
 // 查询热门博客
 router.get('/popular', blog_controller.blog_popular);
