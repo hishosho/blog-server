@@ -10,7 +10,7 @@ router.get('/', blog_controller.blog_list);
 router.get('/blog/:id', blog_controller.blog_by_id)
 
 // 根据ID查询某个博客
-router.get('/blogDetail/:id', blog_controller.blog_by_id)
+router.get('/blogDetail', blog_controller.blogDetail_by_id)
 
 // 查询所有已发布的博客
 router.get('/publishedBlogs', blog_controller.blog_publishedBlogs);

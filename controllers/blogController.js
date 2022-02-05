@@ -21,6 +21,13 @@ exports.blog_by_id = (req, res, next) => {
   })
 }
 
+exports.blogDetail_by_id = (req, res, next) => {
+  Blog.find({ _id: req.query.id }, (err, data) => {
+    if (err) return next(err)
+    responseRet(res, { data: data[0] })
+  })
+}
+
 exports.blog_publishedBlogs = (req, res, next) => {
   // const data = blogList
   // responseRet(res, { data })
@@ -46,7 +53,7 @@ exports.blog_publishedBlogs_by_id = (req, res, next) => {
 }
 
 exports.blog_popular = (req, res, next) => {
-  const data = blogList
+  const data = []
   responseRet(res, { data })
   // Blog
   //   .find()
