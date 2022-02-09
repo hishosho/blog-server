@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/api/blogs', blogsRouter)
+app.use('/blogs', blogsRouter)
 app.use('/tags', tagsRouter)
 
 // catch 404 and forward to error handler
