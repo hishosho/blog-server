@@ -8,7 +8,7 @@ const createToken = (userName) => {
     userName,
     createDate: new Date().getTime()
   }))
-  redisClient.expire(token, REDIS_EXP_TIME, expireCallback || function () {})
+  redisClient.expire(token, REDIS_EXP_TIME, function () {})
   return token
 }
 
