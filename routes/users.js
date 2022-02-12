@@ -13,7 +13,7 @@ router.get('/user/count', user_controller.user_count)
 router.get('/users', user_controller.user_list);
 
 // 创建用户
-router.post('/register', user_controller.user_register)
+// router.post('/register', user_controller.user_register)
 
 // 删除用户
 router.delete('/user/:id', user_controller.user_delete)
